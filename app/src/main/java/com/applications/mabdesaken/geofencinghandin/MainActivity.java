@@ -56,31 +56,13 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
 
         //button for alert
-        Button translateLocationButton = (Button) findViewById(R.id..)
-        TextView locationNameView = (TextView)findViewById(R.id.locationInput);
-        String textFromView = locationNameView.getText().toString().trim();
-        LatLng latLng = fetchCoordinatesForLocation(this, textFromView);
+        Button translateLocationButton = (Button) findViewById(R.id.translateButton);
 
 
-
-        customFence = new Geofence.Builder()
-                .setRequestId("customFence")
-                .setExpirationDuration(Geofence.NEVER_EXPIRE)
-                .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER)
-                .setCircularRegion(latLng.latitude, latLng.longitude, geoFenceRadius)
-                .build();
-
-        .setOnClickListener(new View.OnClickListener() {
+        translateLocationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                try {
-                    convert(v);
-                } catch (NoSuchFieldException e) {
-                    e.printStackTrace();
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                }
+                translateLocation(v);
             }
         });
     }
@@ -103,7 +85,23 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     }
 
     public void translateLocation(View view) {
-        TextView locationNameView = (TextView)findViewById(R.id.locationInput);
+        TextView locationNameView = findViewById(R.id.locationInput);
+        String textFromView = locationNameView.getText().toString().trim();
+        LatLng latLng = fetchCoordinatesForLocation(this, textFromView);
+        customFence = new Geofence.Builder()
+                .setRequestId("customFence")
+                .setExpirationDuration(Geofence.NEVER_EXPIRE)
+                .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER)
+                .setCircularRegion(latLng.latitude, latLng.longitude, geoFenceRadius)
+                .build();
+
+        mRequest = new GeofencingRequest.Builder()
+                .addGeofence(customFence)
+                .setInitialTrigger(GeofencingRequest.INITIAL_TRIGGER_ENTER)
+                .build();
+
+
+
     }
 
     @Override
@@ -124,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
     }
 
-    @Override
+    /*@Override
     public void onConnected(@Nullable Bundle bundle) {
         Log.d(TAG, "Google Play Services connected!");
 
@@ -190,6 +188,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             // permissions this app might request
         }
     }
+    */
 
     @Override
     public void onConnectionSuspended(int i) {

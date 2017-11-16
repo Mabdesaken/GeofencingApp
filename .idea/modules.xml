@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/GeofencingHandin.iml" filepath="$PROJECT_DIR$/GeofencingHandin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/GeofencingAppHanidin.iml" filepath="$PROJECT_DIR$/.idea/GeofencingAppHanidin.iml" />
+      <module fileurl="file://C:\Users\Aupke\AndroidStudioProjects\GeofenceHandin\GeofencingAppHanidin\GeofencingHandin.iml" filepath="C:\Users\Aupke\AndroidStudioProjects\GeofenceHandin\GeofencingAppHanidin\GeofencingHandin.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\Aupke\AndroidStudioProjects\GeofenceHandin\GeofencingAppHanidin\app\app.iml" filepath="C:\Users\Aupke\AndroidStudioProjects\GeofenceHandin\GeofencingAppHanidin\app\app.iml" />
     </modules>
   </component>
 </project>
