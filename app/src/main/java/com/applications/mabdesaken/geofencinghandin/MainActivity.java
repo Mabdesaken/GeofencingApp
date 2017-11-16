@@ -88,6 +88,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         TextView locationNameView = findViewById(R.id.locationInput);
         String textFromView = locationNameView.getText().toString().trim();
         LatLng latLng = fetchCoordinatesForLocation(this, textFromView);
+        Log.i("Location: ", latLng.toString());
         customFence = new Geofence.Builder()
                 .setRequestId("customFence")
                 .setExpirationDuration(Geofence.NEVER_EXPIRE)
@@ -99,6 +100,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                 .addGeofence(customFence)
                 .setInitialTrigger(GeofencingRequest.INITIAL_TRIGGER_ENTER)
                 .build();
+
 
 
 

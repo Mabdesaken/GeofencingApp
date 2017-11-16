@@ -15,8 +15,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
+        android:hint="Write location here"
         android:inputType="textPersonName"
-        android:text="Write Location Here"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
@@ -31,18 +31,10 @@
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:text="Translate"
+        android:text="Create geofence"
+        android:onClick="translateLocation"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <EditText
-        android:id="@+id/RadiusView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Radius For Geofence"
-        tools:layout_editor_absoluteX="85dp"
-        tools:layout_editor_absoluteY="243dp" />
 </android.support.constraint.ConstraintLayout>
