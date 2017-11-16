@@ -2,8 +2,11 @@ package com.applications.mabdesaken.geofencinghandin;
 
 import android.Manifest;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,7 +14,9 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -19,15 +24,23 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofencingRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.model.LatLng;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
     public static final String TAG = "BanegaardFence";
     public static final int LOCATION_REQUEST_CODE = 1;
+    public static final String geoCoderTAG = "geoCodeTAG";
+    public static final int radius = 0;
 
     private GoogleApiClient mGoogleApiClient;
-    private Geofence mBanegaardFence;
+    private Geofence customFence;
     private GeofencingRequest mRequest;
     private PendingIntent mPi;
+    private float geoFenceRadius = 500;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +56,54 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
 
         //button for alert
-        Button alertButton = (Button)findViewById(R.id.alertButton);
+        Button translateLocationButton = (Button) findViewById(R.id..)
+        TextView locationNameView = (TextView)findViewById(R.id.locationInput);
+        String textFromView = locationNameView.getText().toString().trim();
+        LatLng latLng = fetchCoordinatesForLocation(this, textFromView);
 
+
+
+        customFence = new Geofence.Builder()
+                .setRequestId("customFence")
+                .setExpirationDuration(Geofence.NEVER_EXPIRE)
+                .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER)
+                .setCircularRegion(latLng.latitude, latLng.longitude, geoFenceRadius)
+                .build();
+
+        .setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                try {
+                    convert(v);
+                } catch (NoSuchFieldException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    public static LatLng fetchCoordinatesForLocation(Context context, String locationName) {
+        if (!Geocoder.isPresent()) {
+            Log.w(geoCoderTAG, "Geocode not present");
+        }
+
+        Geocoder geocoder = new Geocoder(context, Locale.getDefault());
+
+        try {
+            List<Address> addresses = geocoder.getFromLocationName(locationName, radius);
+            return new LatLng(addresses.get(0).getLatitude(), addresses.get(0).getLongitude());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+
+    }
+
+    public void translateLocation(View view) {
+        TextView locationNameView = (TextView)findViewById(R.id.locationInput);
     }
 
     @Override
